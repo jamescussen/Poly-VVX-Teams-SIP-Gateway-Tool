@@ -1,6 +1,6 @@
 ########################################################################
 # Name: Poly VVX Teams SIP Gateway Tool
-# Version: v1.0.0 (11/2/2022)
+# Version: v1.0.1 (3/3/2022)
 # Original Release Date: 11/2/2022
 # Created By: James Cussen
 # Web Site: https://www.myteamslab.com
@@ -72,6 +72,9 @@
 # Release Notes:
 # 1.00 Initial Release.
 #	- 
+#
+# 1.01 Bug Fix
+#	- Fixed bug with Provisioning server setting always selecting Asia Pacific when using the GUI. - Thanks to Branko Sabadi for reporting this issue!
 #
 ########################################################################
 
@@ -722,6 +725,12 @@ if($index -lt 0)
 {$ProvisioningCombo.SelectedIndex = 0}
 else
 {$ProvisioningCombo.SelectedIndex = $index}
+
+$ProvisioningCombo.Add_SelectedIndexChanged({ 
+	$provisioning = $ProvisioningCombo.Text
+	Write-Verbose "Updating Provisioning Country: $provisioning"
+	$script:Region = $provisioning
+})
 
 
 
@@ -3765,11 +3774,12 @@ elseif($Command.ToLower() -eq "restart")
 	}
 }
 
+
 # SIG # Begin signature block
 # MIIZlgYJKoZIhvcNAQcCoIIZhzCCGYMCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGb6LW6ED3w/19G989SRkBDVs
-# CTqgghSkMIIE/jCCA+agAwIBAgIQDUJK4L46iP9gQCHOFADw3TANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/psdQTr9MxB9U+4t2vCSro6i
+# MC2gghSkMIIE/jCCA+agAwIBAgIQDUJK4L46iP9gQCHOFADw3TANBgkqhkiG9w0B
 # AQsFADByMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
 # VQQLExB3d3cuZGlnaWNlcnQuY29tMTEwLwYDVQQDEyhEaWdpQ2VydCBTSEEyIEFz
 # c3VyZWQgSUQgVGltZXN0YW1waW5nIENBMB4XDTIxMDEwMTAwMDAwMFoXDTMxMDEw
@@ -3884,23 +3894,23 @@ elseif($Command.ToLower() -eq "restart")
 # BAMTKERpZ2lDZXJ0IFNIQTIgQXNzdXJlZCBJRCBDb2RlIFNpZ25pbmcgQ0ECEAo0
 # hyG/vRZB2hmqZmgHQWAwCQYFKw4DAhoFAKB4MBgGCisGAQQBgjcCAQwxCjAIoAKA
 # AKECgAAwGQYJKoZIhvcNAQkDMQwGCisGAQQBgjcCAQQwHAYKKwYBBAGCNwIBCzEO
-# MAwGCisGAQQBgjcCARUwIwYJKoZIhvcNAQkEMRYEFFLK6YbydKgnztrlbM/X8ee4
-# WB36MA0GCSqGSIb3DQEBAQUABIIBADcXOWMgfXTnbmf/TKjsSIJSl3+a0RqRADFO
-# E9u3wqZ9MjlZRH2rLwaQV9MsHttOOJTl/rWiqeqXW1HHnbirGMut14LqIa1Hxl8r
-# Q53bliWo2lEpB5qoHC7qAg4kg6Bmwc/IkORVf51g33Sf8g0Ie0UWbE+tBxJ7iTs/
-# gNb8OyFk78j7Sr1q2hmCvpwcZuNI+0J3J1xTW2we3bqbf4SX6MJRPslB5KxVNAft
-# yqSBDJ8ujLheRHe8o+EjtPpji3cRSUTupDYz/KNj7VxXp81b6DtSwLxGpC2PY9dx
-# Fr6jeLnoWFW4bAOcO6h1+lVQ8bU/SEJSk3Tq44cbaRux8cpVD92hggIwMIICLAYJ
+# MAwGCisGAQQBgjcCARUwIwYJKoZIhvcNAQkEMRYEFHaMxjAfC1dGrqhbB81Wj0GF
+# FUcKMA0GCSqGSIb3DQEBAQUABIIBALSslh4hT2fTNi41av9NIQ10A0R3F9OSzDSa
+# 2/Z2y5EfNX9o4AbkufP1CkR8t+OdizPf+WuWmp6NBLykILqNwxFt5AXXcU6U1Ald
+# wzuvZIUQEqpe3RbVc23EB0I9RRK050B/SIIbCjJ5DQIEhxcdJ55Cmd32kPvZ0Ku3
+# uPwtXSYsnu4Y3tP+UclRk0pigOrZHpVqMALmoFVnINCFxjrNkdDezjhKO/Kjm2M7
+# hET7zomMgbtjsBxpcnFPVGFvRgXAzng89BT1Ta7JxTFZto8R6Z2u3Q5k+QPlM8Wp
+# 4ZIf3crurGot+umCfxiU1/Rux9ryCe4VEFmEm12WBKCJCTpVUcWhggIwMIICLAYJ
 # KoZIhvcNAQkGMYICHTCCAhkCAQEwgYYwcjELMAkGA1UEBhMCVVMxFTATBgNVBAoT
 # DERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTExMC8GA1UE
 # AxMoRGlnaUNlcnQgU0hBMiBBc3N1cmVkIElEIFRpbWVzdGFtcGluZyBDQQIQDUJK
 # 4L46iP9gQCHOFADw3TANBglghkgBZQMEAgEFAKBpMBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIyMDIxMjEyMTE1OVowLwYJKoZIhvcN
-# AQkEMSIEIKNsye9P6gZCOZME/+zaWOGN85bXEU76dwWXdmRYXXPhMA0GCSqGSIb3
-# DQEBAQUABIIBACAfEXq6eHCdHtcXgbhCYquVGulp3UNrsvjCT7OxcYf9zU+wsxbP
-# 1bzRBjqHDD+sGhioOUCHrXQyfo79uhMLKbos8Qq2M6hhICyViF9Ak3WE2WsEhwyb
-# DvCkqtaP9Aqr5tlEinB+sOo55itSKH44usiHeK8Rj93ut52392kDJ916sw+2QxRX
-# AmaF1kD3vLmahFth2wmHIgJeP5Wt6AZ9n2CwNIootRTlRDfirXzrUod2AbGil/J1
-# 9z+kMIUMOMq7MOjzZMS3UAy2Jers1F0I60PHVyY/oBBIwnkPGZ3bGtErAJ1/QqsG
-# pzdKFG9enJCCVOBn6KkKvwFbO/KfpnOpgRY=
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIyMDMwMjIzMjQzOFowLwYJKoZIhvcN
+# AQkEMSIEILTYWDidmbBJnZa1tckOj6MKR8qQKs2kimXTLIAfqCCcMA0GCSqGSIb3
+# DQEBAQUABIIBAINGduwmerlWWHWrNY07P+oNojHCYMCn6uCA41dYrIRKxHJFdt9S
+# OZMzjbBWfeQhu+rSb7j8yz6nIULdtaWOBbeGSgpg6tBm7XS0DrBxOoFkhM8QGT4n
+# thq10UWzaNg65G80HlutL+Oj5nN2cTK9dAdFZ+7VnleiSWv0VZ0/8Vm7Zl8+YXLM
+# F0aCjTOjYk3SNq5+esJlS8M9/3uXzAfMR1xDuYbBCs7RM/i8/6lje8Q4vz1acORE
+# QJXWgccF3FQ36+4salhKya9mVIxf6S0IesqIL+h+XGZ7zw4n1uCesZr1Ahq6K0cC
+# 3fyvI6ctOun/sDN+rVJs61x3bBjgsQaEFN0=
 # SIG # End signature block

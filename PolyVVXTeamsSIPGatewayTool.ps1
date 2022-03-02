@@ -718,14 +718,16 @@ $objForm.Controls.Add($ProvisioningCombo)
 [void] $ProvisioningCombo.Items.Add("Asia Pacific"); [void] $ProvisioningCombo.Items.Add("America"); [void] $ProvisioningCombo.Items.Add("Europe");
 $ProvisioningArray = @("asia pacific", "america","europe")
 #Leave default to asia pacific
-#$index = $ProvisioningArray.ForEach{$_}.IndexOf($Script:Region.ToLower())
+#form will load asia pacific initally. After loaded it will populate values in initiate provisioning button. 
 
-if($ProvisioningCombo.SelectedIndex  -gt 0)
+$ProvisioningCombo.SelectedIndex = $ProvisioningCombo.FindString("Asia Pacific")
+
+if($ProvisioningCombo.SelectedIndex  -le 0)
 {
-	$Script:Region = $ProvisioningArray[$ProvisioningCombo.SelectedIndex]
+	$ProvisioningCombo.SelectedIndex = 0
 }
 else {
-	$ProvisioningCombo.SelectedIndex = 0 #cosmetic only. line 333 variable holds default value.
+	#nothing
 }
 
 
@@ -800,6 +802,7 @@ $ProvisionButton.Add_Click({
 	$script:AdminPassword = $RESTPasswordTextBox.text
 	$Script:WebServicePort = $PortTextBox.text
 	$Script:UseHTTPS = $HTTPSCheckBox.Checked
+	$Script:Region = $ProvisioningArray[$ProvisioningCombo.SelectedIndex]
 	ProvisionPhones $IPRanges
 	EnableButtons
 	$StatusLabel.Text = ""

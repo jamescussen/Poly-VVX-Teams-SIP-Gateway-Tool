@@ -7,6 +7,10 @@ This tool allows you to remotely provision Poly VVX phones for Microsoft Teams S
   <img src="https://github.com/jamescussen/Poly-VVX-Teams-SIP-Gateway-Tool/raw/main/PolyVVXTeamsSIPGatewayTool.png" alt="Tool Image"/>
 </p>
 
+**Update 1.01:**
+
+* Fixed bug with Provisioning server setting always selecting Asia Pacific when using the GUI. - Thanks to Branko Sabadi for reporting this issue!
+
 **Features:**
 
 * GUI and command line execution modes. To use the GUI just run the tool without the "-Command" flag. to use command line mode run the tool using the "-Command" flag. See the command line flags section of the blog post for more details.

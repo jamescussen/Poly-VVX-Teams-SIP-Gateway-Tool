@@ -413,7 +413,7 @@ if($OpenUI) #LOAD UI START
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing") 
 
 $objForm = New-Object System.Windows.Forms.Form 
-$objForm.Text = "Poly VVX - Teams SIP Gateway Tool 1.00"
+$objForm.Text = "Poly VVX - Teams SIP Gateway Tool 1.01"
 $objForm.Size = New-Object System.Drawing.Size(430,370) 
 $objForm.MinimumSize = New-Object System.Drawing.Size(430,370) 
 $objForm.StartPosition = "CenterScreen"

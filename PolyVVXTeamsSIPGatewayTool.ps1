@@ -722,8 +722,10 @@ $ProvisioningArray = @("asia pacific", "america","europe")
 
 if($ProvisioningCombo.SelectedIndex  -gt 0)
 {
-	#update region index based on selection
 	$Script:Region = $ProvisioningArray[$ProvisioningCombo.SelectedIndex]
+}
+else {
+	$ProvisioningCombo.SelectedIndex = 0 #cosmetic only. line 333 variable holds default value.
 }
 
 

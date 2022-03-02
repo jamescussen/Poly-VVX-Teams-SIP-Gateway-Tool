@@ -717,11 +717,14 @@ $objForm.Controls.Add($ProvisioningCombo)
 
 [void] $ProvisioningCombo.Items.Add("Asia Pacific"); [void] $ProvisioningCombo.Items.Add("America"); [void] $ProvisioningCombo.Items.Add("Europe");
 $ProvisioningArray = @("asia pacific", "america","europe")
-$index = $ProvisioningArray.ForEach{$_}.IndexOf($Script:Region.ToLower())
-if($index -lt 0)
-{$ProvisioningCombo.SelectedIndex = 0}
-else
-{$ProvisioningCombo.SelectedIndex = $index}
+#Leave default to asia pacific
+#$index = $ProvisioningArray.ForEach{$_}.IndexOf($Script:Region.ToLower())
+
+if($ProvisioningCombo.SelectedIndex  -gt 0)
+{
+	#update region index based on selection
+	$Script:Region = $ProvisioningArray[$ProvisioningCombo.SelectedIndex]
+}
 
 
 
